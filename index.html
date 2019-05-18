@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Digit-Recognition</title>
+    <title>Digit Recognition</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script>
     <script type="text/javascript">
         // Variables for referencing the canvas and 2dcanvas context
@@ -137,7 +137,7 @@
                 canvas.addEventListener('touchmove', sketchpad_touchMove, false);
             }
             
-            model = await tf.loadModel('https://talk2abhinav.github.io/Digit-Recognition/model.json');
+            model = await tf.loadModel('https://talk2abhinav.github.io/Digit-Recogition/model.json');
            
            console.log(model);
         }
@@ -166,6 +166,13 @@
 
     <style>
         /* Some CSS styling */
+        body{
+                margin: 0;
+                padding: 0;
+                font-family: sans-serif;
+                background: #34495e;
+            }
+
         #mnistapp {
             /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
             -webkit-touch-callout: none;
@@ -175,52 +182,98 @@
             -ms-user-select: none;
             user-select: none;
         }
+        #position{
+            position: absolute;
+            top: 100;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            color: #2ecc71;
+            font-family: sans-serif;
+        }
         .rightside {
+            position: absolute;
+            top: 0;
+            bottom: 100;
+            right: 0;
+            left: 250;
+            margin: auto;
             float: left;
-            width: 140px;
-            height: 125px;
-            background-color: #def;
+            width: 200px;
+            height: 180px;
+            font-family: sans-serif;
+            font-size: 15;
+            background-color: #34498e;
             padding: 10px;
+            border: 2px solid #2ecc71;
             border-radius: 4px;
         }
         .leftside {
-            float: left;
+            position: absolute;
+            top: 300;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
             width: 150px;
             height: 200px;
-            margin-left: 10px;
+            border-radius: 4px;
         }
         #sketchpad {
-            float: left;
-            height: 140px;
-            width: 140px;
-            border: 2px solid #888;
+            position: absolute;
+            top: 0;
+            bottom: 100;
+            right: 250;
+            left: 0;
+            margin: auto;
+            padding: 0;
+            height: 200px;
+            width: 200px;
+            border: 2px solid #2ecc71;
             border-radius: 4px;
-            position: relative;
             background-color: black;
             /* Necessary for correct mouse co-ords in Firefox */
         }
         #clearbutton {
-            font-size: 15px;
-            padding: 10px;
-            -webkit-appearance: none;
-            background: #eee;
-            border: 1px solid #888;
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #2ecc71;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+            font-family: sans-serif;
         }
         #predictbutton {
-            font-size: 15px;
-            padding: 10px;
-            -webkit-appearance: none;
-            background: #eee;
-            border: 1px solid #888;
+            border:0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #2ecc71;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s; 
+            cursor: pointer;
+            font-family: sans-serif;
         }
+
     </style>
 </head>
 
 <body onload="init()">
-    <div id="mnistapp">
-        <h4 style="margin-left: 10px;">Draw a number in the left-hand box</h4>
-        <div class="leftside">
-            <canvas id="sketchpad" height="140" width="140"></canvas>
+    <div id="mnistapp" align="center">
+        <h5 id="position">Draw a number in the left-hand box</h4>
+        <canvas id="sketchpad" height="140" width="140"></canvas>
+            <div class="leftside">
             <input type="submit" value="Predict" id="predictbutton" onclick="predict();">
             <input type="submit" value="Clear" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
         </div>
